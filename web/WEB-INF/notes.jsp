@@ -32,21 +32,21 @@
                         <form action="notes" method="post" >
                             <input type="submit" value="Delete">
                             <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="selectedUsername" value="${note.userID}">
+                            <input type="hidden" name="selectedNoteID" value="${note.userID}">
                         </form>
                     </td>
                     <td>
                         <form action="notes" method="get">
                             <input type="submit" value="Edit">
                             <input type="hidden" name="action" value="view">
-                            <input type="hidden" name="selectedUsername" value="${note.userID}">
+                            <input type="hidden" name="selectedNoteID" value="${note.userID}">
                         </form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
                         
-        <c:if test="${selectedUser == null}">
+        <c:if test="${selectedNote == null}">
             <h3>Add Note</h3>
             <form action="notes" method="POST">
                 Note ID: <input type="text" name="userID"><br>
@@ -56,12 +56,12 @@
                 <input type="submit" value="Save">
             </form>
         </c:if>
-        <c:if test="${selectedUser != null}">
+        <c:if test="${selectedNote != null}">
             <h3>Edit Note</h3>
             <form action="notes" method="POST">
-                Note ID: <input type="text" name="username" value="${selectedUser.userID}" readonly><br>
-                Date Created: <input type="text" name="firstname" value="${selectedUser.datecreated}"><br>
-                Contents: <input type="text" name="lastname" value="${selectedUser.contents}"><br>
+                Note ID: <input type="text" name="username" value="${selectedNote.userID}" readonly><br>
+                Date Created: <input type="text" name="firstname" value="${selectedNote.datecreated}"><br>
+                Contents: <input type="text" name="lastname" value="${selectedNote.contents}"><br>
                 <input type="hidden" name="action" value="edit">
                 <input type="submit" value="Save">
             </form>

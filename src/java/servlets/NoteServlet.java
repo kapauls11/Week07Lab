@@ -39,10 +39,10 @@ public class NoteServlet extends HttpServlet {
          NoteService ns = new NoteService();
         String action = request.getParameter("action");
         if (action != null && action.equals("view")) {
-            String selectedUsername = request.getParameter("selectedUsername");
+            String selectedNoteID = request.getParameter("selectedNoteID");
             try {
-                Note note = ns.get(Integer.parseInt((selectedUsername)));
-                request.setAttribute("selectedUser", note);
+                Note note = ns.get(Integer.parseInt((selectedNoteID)));
+                request.setAttribute("selectedNote", note);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -76,7 +76,7 @@ public class NoteServlet extends HttpServlet {
 
             try {
             if (action.equals("delete")) {
-                String selectedNoteId = request.getParameter("selectedUsername");
+                String selectedNoteId = request.getParameter("selectedNoteID");
                 ns.delete(Integer.parseInt(selectedNoteId));
             } else if (action.equals("edit")) {
                 Note note = new Note(Integer.parseInt(noteID), contents);
