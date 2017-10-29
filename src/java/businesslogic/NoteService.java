@@ -42,8 +42,10 @@ public class NoteService {
         return noteDB.delete(deletedNote);
     }
 
-    public int insert(int noteID,Date dateCreated,String contents) throws Exception {
-        Note note = new Note(noteID,dateCreated,contents);
+    public int insert(String contents) throws Exception {
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        Note note = new Note(0, sqlDate, contents);
         return noteDB.insert(note);
     }
     

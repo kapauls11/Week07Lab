@@ -23,6 +23,11 @@ import java.util.logging.Logger;
  */
 public class NoteDB {
     
+     private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+        java.sql.Date newDate = new java.sql.Date(uDate.getTime());
+        return newDate;
+}
+    
      public int insert(Note note) throws NotesDBException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -31,7 +36,7 @@ public class NoteDB {
             String preparedQuery = "INSERT INTO Note (noteID,dateCreated,contents) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(preparedQuery);
             ps.setInt(1, note.getNoteID());
-            ps.setDate(2, (Date) note.getDateCreated());
+             ps.setDate(2, convertUtilToSql(note.getDateCreated()));
             ps.setString(3, note.getContents());
             int rows = ps.executeUpdate();
             return rows;
@@ -48,16 +53,14 @@ public class NoteDB {
         Connection connection = pool.getConnection();
 
         try {
-            String preparedSQL = "UPDATE Note SET "
-                    + "dateCreated = ?, "
-                    + "contents = ?,"
+            String preparedSQL = "UPDATE Notes SET "
+                    + "contents = ?"
                     + "WHERE noteID = ?";
 
             PreparedStatement ps = connection.prepareStatement(preparedSQL);
 
-            ps.setDate(1, (Date) note.getDateCreated());
-            ps.setString(2, note.getContents());
-            ps.setInt(3, note.getNoteID());
+            ps.setString(1, note.getContents());
+            ps.setInt(2, note.getNoteID());
             
             int rows = ps.executeUpdate();
             return rows;

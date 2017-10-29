@@ -19,7 +19,7 @@ CREATE TABLE User(
 
 CREATE TABLE Notes( 
     noteID INT NOT NULL AUTO_INCREMENT,
-    dateCreated DATE NOT NULL,
+    dateCreated DATETIME NOT NULL,
     contents VARCHAR(10000) NOT NULL,
     PRIMARY KEY (noteID)
 );

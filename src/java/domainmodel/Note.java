@@ -6,9 +6,6 @@
 package domainmodel;
 
 import java.io.Serializable;
-import java.util.Date;
-
-
 /**
  *
  * @author 698437
@@ -16,22 +13,24 @@ import java.util.Date;
 public class Note implements Serializable {
 
     private int noteID;
-    private Date dateCreated;
+   private java.util.Date dateCreated;
     private String contents;
 
     public Note() {
 
     }
-
-    public Note(int noteID, Date dateCreated,String contents) {
-        this.noteID=noteID;
-        this.dateCreated=dateCreated;
-        this.contents=contents;
+     public Note(int noteID, String contents)
+    {
+        this.noteID = noteID;
+        this.contents = contents;
     }
-    public Note(int noteID, String contents) {
-        this.noteID=noteID;
-        this.contents=contents;
-    }
+    
+    public Note(int noteID, java.util.Date dateCreated, String contents)
+    {
+        this.noteID = noteID;
+        this.dateCreated = dateCreated;
+        this.contents = contents;
+}
 
     public int getNoteID() {
         return noteID;
@@ -49,11 +48,14 @@ public class Note implements Serializable {
         this.contents = contents;
     }
 
-    public Date getDateCreated() {
+    public java.util.Date getDateCreated()
+    {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(java.util.Date dateCreated)
+    {
         this.dateCreated = dateCreated;
     }
+
 }

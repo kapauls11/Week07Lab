@@ -69,33 +69,33 @@ public class NoteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
-        String action = request.getParameter("action");
-        String noteID = request.getParameter("noteID");
-        String dateCreated = request.getParameter("dateCreated");
+         String noteID = request.getParameter("noteID");
         String contents = request.getParameter("contents");
-        int noteID1=Integer.parseInt(noteID);
-        try {
-        Date date = in.parse(dateCreated);
+        String action = request.getParameter("action");
         NoteService ns = new NoteService();
 
+            try {
             if (action.equals("delete")) {
-                ns.delete(noteID1);
+                String selectedNoteId = request.getParameter("selectedUsername");
+                ns.delete(Integer.parseInt(selectedNoteId));
             } else if (action.equals("edit")) {
-                ns.update(noteID1,contents);
+                Note note = new Note(Integer.parseInt(noteID), contents);
+                
+                ns.update(note.getNoteID(), note.getContents());
             } else if (action.equals("add")) {
-                ns.insert(noteID1,date,contents);
+                ns.insert(contents);
             }
+        } catch (Exception ex) {
+            request.setAttribute("errorMessage", "Whoops.  Could not perform that action.");
+        }
         
         ArrayList<Note> notes = null;
-        notes = (ArrayList<Note>) ns.getAll();
+        try {
+            notes = (ArrayList<Note>) ns.getAll();
+        } catch (Exception ex) {
+            Logger.getLogger(NoteServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         request.setAttribute("notes", notes);
-        getServletContext().getRequestDispatcher("/WEB-INF/notes.jsp").forward(request, response);
-        }
-        catch(Exception e){
-           e.printStackTrace(); 
-        }
-        
         getServletContext().getRequestDispatcher("/WEB-INF/notes.jsp").forward(request, response);
     }
 
