@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Note implements Serializable {
 
     private int noteID;
-   private java.util.Date dateCreated;
+    private java.util.Date dateCreated;
     private String contents;
 
     public Note() {

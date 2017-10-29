@@ -8,11 +8,7 @@ package servlets;
 import businesslogic.NoteService;
 import domainmodel.Note;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -69,7 +65,7 @@ public class NoteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String noteID = request.getParameter("noteID");
+        String noteID = request.getParameter("noteID");
         String contents = request.getParameter("contents");
         String action = request.getParameter("action");
         NoteService ns = new NoteService();

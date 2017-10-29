@@ -8,8 +8,6 @@ package businesslogic;
 import dataaccess.NoteDB;
 import dataaccess.NotesDBException;
 import domainmodel.Note;
-import domainmodel.User;
-import java.util.Date;
 import java.util.List;
 
 /**
