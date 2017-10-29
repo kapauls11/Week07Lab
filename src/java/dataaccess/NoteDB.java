@@ -32,7 +32,7 @@ public class NoteDB {
             PreparedStatement ps = connection.prepareStatement(preparedQuery);
             ps.setInt(1, note.getNoteID());
             ps.setDate(2, (Date) note.getDateCreated());
-            ps.setString(2, note.getContents());
+            ps.setString(3, note.getContents());
             int rows = ps.executeUpdate();
             return rows;
         } catch (SQLException ex) {
