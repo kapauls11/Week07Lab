@@ -72,8 +72,8 @@ public class NoteServlet extends HttpServlet {
 
             try {
             if (action.equals("delete")) {
-                String selectedNoteId = request.getParameter("selectedNoteID");
-                ns.delete(Integer.parseInt(selectedNoteId));
+               String selectedNoteId = request.getParameter("selectedNoteID");
+               ns.delete(Long.parseLong(selectedNoteId));
             } else if (action.equals("edit")) {
                 Note note = new Note(Integer.parseInt(noteID), contents);
                 

@@ -35,10 +35,11 @@ public class NoteService {
         return noteDB.update(note);
     }
 
-    public int delete(int noteID) throws Exception {
-        Note deletedNote = noteDB.get(noteID);
+     public int delete(Long noteID) throws Exception{
+        Note deletedNote = noteDB.getNote(noteID);
         return noteDB.delete(deletedNote);
     }
+
 
     public int insert(String contents) throws Exception {
         java.util.Date utilDate = new java.util.Date();

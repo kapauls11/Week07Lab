@@ -138,21 +138,28 @@ public class NoteDB {
         }
     }
     public int delete(Note note) throws NotesDBException {
-        ConnectionPool pool = ConnectionPool.getInstance();
+         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
-        String preparedQuery = "DELETE FROM Note WHERE noteID = ?";
+        String preparedQuery = "DELETE FROM Notes WHERE noteID = ?";
         PreparedStatement ps;
 
-        try {
+        try{
             ps = connection.prepareStatement(preparedQuery);
             ps.setInt(1, note.getNoteID());
             int rows = ps.executeUpdate();
             return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot delete " + note.toString(), ex);
-            throw new NotesDBException("Error deleting Note");
-        } finally {
+        } catch (SQLException ex){
+            Logger.getLogger(NoteDB.class.getName()).log(Level.SEVERE, "Cannot delete " + note.toString(), ex);
+            throw new NotesDBException("Error deleting note");
+        } finally
+        {
             pool.freeConnection(connection);
-        }
+         }
+    }
+    
+     public Note getNote(long noteID){
+        Note note = new Note();
+        note.setNoteID((int) noteID);
+        return note;
     }
 }
